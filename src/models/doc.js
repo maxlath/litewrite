@@ -43,6 +43,12 @@ define(function(require) {
       var limit = 14 * 86400000;
       var opacity = diff > limit ? 0.4 : Math.round( (0.4 + ((limit - diff) / limit) * 0.6) * 100 ) / 100;
       return opacity;
+    },
+
+    countWords: function() {
+      // strip tags, remove whitespace
+      var content = this.get('content').replace(/<\/?[a-z][^>]*>/gi, '').trim();
+      return content ? (content.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0;
     }
 
   });
